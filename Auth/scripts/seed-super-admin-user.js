@@ -78,9 +78,13 @@ async function main() {
   console.info("Admin sedding completed: ", user);
 }
 
+function excute() {
 main()
   .catch((e) => {
     console.error("❌ Seed failed:", e);
     process.exit(1);
   })
-  .finally(() => prisma.$disconnect());
+  .finally(() => prisma.$disconnect())
+}
+
+module.exports = excute;

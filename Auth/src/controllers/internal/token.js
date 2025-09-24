@@ -1,5 +1,6 @@
 const verifyClientInfo = require("../../services/verifyClientInfo");
 const { generateToken } = require("../../utils/token");
+
 async function getAuthToken(req, res, next) {
   try {
     const { client_id, client_secret } = req.body;

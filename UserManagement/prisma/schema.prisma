@@ -20,16 +20,57 @@ enum Role {
 }
 
 model userProfile {
-  id          String   @id @default(uuid())
-  userId      String   @unique()
+  id          String  @id @default(uuid())
+  userId      String  @unique
   first_name  String
   middle_name String
   last_name   String
-  email       String   @unique
+  email       String  @unique
   shift       String?
-  department  String
-  role        Role     @default(STUDENT)
-  isActive    Boolean  @default(false)
-  createAt    DateTime @default(now())
-  updateAt    DateTime @updatedAt
+
+  departmentId String?
+  department   Department? @relation(fields: [departmentId], references: [id])
+
+  classId String?
+  class   classDetails? @relation(fields: [classId], references: [id])
+
+  status    String   @default("Inactives")
+  role      Role     @default(STUDENT)
+  isActive  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  attendances Attendance[]
+}
+
+model Department {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  classes classDetails[]
+  users   userProfile[]
+}
+
+model classDetails {
+  id           String     @id @default(uuid())
+  name         String
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+
+  users userProfile[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Attendance {
+  id          String   @id @default(uuid())
+  date        DateTime
+  status      String   // e.g., "Present", "Absent", "Late"
+  userId      String
+  user        userProfile @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

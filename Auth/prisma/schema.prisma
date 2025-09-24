@@ -1,12 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  // output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -14,60 +7,60 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum RolesType {
-  ADMIN
-  TEACHER
-  STUDENT
-}
-
 model users {
-  id                String    @id @default(uuid())
+  id                String           @id @default(uuid())
   first_name        String
   middle_name       String
   last_name         String
-  role              RolesType @default(STUDENT)
-  email             String    @unique
-  password          String?
-  is_active         Boolean   @default(false)
-  is_email_verified Boolean   @default(false)
-  is_2fa_enabled    Boolean   @default(false)
-  created_at        DateTime  @default(now())
-  updated_at        DateTime  @updatedAt
-
-  rolesPermission RolePermission[]
+  role              RolesType        @default(STUDENT)
+  email             String           @unique
+  password          String
+  reset_token    String?
+  reset_token_expires_at DateTime?
+  is_active         Boolean          @default(false)
+  is_email_verified Boolean          @default(false)
+  is_2fa_enabled    Boolean          @default(false)
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+  rolesPermission   RolePermission[]
 }
 
 model Roles {
-  id          String  @id @default(uuid())
-  name        String
-  description String?
-
+  id              String           @id @default(uuid())
+  name            String
+  description     String?
   rolesPermission RolePermission[]
 }
 
 model Permissions {
-  id          String  @id @default(uuid())
-  name        String
-  description String?
-
+  id              String           @id @default(uuid())
+  name            String
+  description     String?
   rolesPermission RolePermission[]
 }
 
 model RolePermission {
-  id            String @id @default(uuid())
+  id            String      @id @default(uuid())
   role_id       String
   permission_id String
   user_id       String
-
-  roles       Roles       @relation(fields: [role_id], references: [id])
-  permissions Permissions @relation(fields: [permission_id], references: [id])
-  users       users       @relation(fields: [user_id], references: [id])
+  permissions   Permissions @relation(fields: [permission_id], references: [id])
+  roles         Roles       @relation(fields: [role_id], references: [id])
+  users         users       @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@unique([role_id, permission_id, user_id])
 }
 
-model clientInfo {
-  client_id String @id
-  client_name String @unique
+model ClientInfo {
+  client_id     String @id
+  client_name   String @unique
   client_secret String @unique
+}
+
+
+
+enum RolesType {
+  ADMIN
+  TEACHER
+  STUDENT
 }

@@ -47,8 +47,13 @@ CREATE TABLE "public"."RolePermission" (
     CONSTRAINT "RolePermission_pkey" PRIMARY KEY ("id")
 );
 
--- CreateIndex
-CREATE UNIQUE INDEX "users_email_key" ON "public"."users"("email");
+-- CreateTable
+CREATE TABLE "public"."ClientInfo" (
+    "client_id" TEXT NOT NULL PRIMARY KEY,
+    "client_name" TEXT UNIQUE NOT NULL,
+    "client_secret" TEXT UNIQUE NOT NULL
+);
+
 
 -- CreateIndex
 CREATE UNIQUE INDEX "RolePermission_role_id_permission_id_user_id_key" ON "public"."RolePermission"("role_id", "permission_id", "user_id");

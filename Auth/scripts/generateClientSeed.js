@@ -5,7 +5,7 @@ const { hashPassword } = require("../src/utils/hash")
 const prisma = new PrismaClient();
 const client_name = "user-management";
 
-(async function main(){
+async function main(){
     // Generate client_id as UUID (v4)
     (async () => {
       const { v4: uuidv4 } = await import('uuid');
@@ -25,4 +25,5 @@ const client_name = "user-management";
     })
     console.log("Client info inserted successfully.");
     })();
-})()
+}
+module.exports = main;

@@ -16,4 +16,5 @@ router.post(
   },
   require("./createUser")
 );
+router.use("/user", require("./deleteUser"));
 module.exports = router;

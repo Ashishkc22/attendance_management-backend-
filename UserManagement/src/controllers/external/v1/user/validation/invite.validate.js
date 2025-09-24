@@ -6,7 +6,7 @@ const userSchema = Joi.object({
   last_name: Joi.string().required(),
   email: Joi.string().email().required(),
   shift: Joi.string().optional().allow(null), // optional or nullable
-  department: Joi.string().required(),
+  departmentId: Joi.string().required(),
   role: Joi.string().valid('STUDENT', 'TEACHER').required(), // default handled by DB
 });
 

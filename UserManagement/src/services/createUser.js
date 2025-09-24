@@ -4,7 +4,7 @@ const deleteAuthUser = require("./deleteAuthUser")
 const generatePassword = require("../utils/generatePassword");
 
 async function inviteUser(data) {
-  const { first_name, middle_name, last_name, email, department, shift, role } =
+  const { first_name, middle_name, last_name, email, departmentId, shift, role } =
     data;
 
   // 1. Create user in Auth service
@@ -32,7 +32,7 @@ async function inviteUser(data) {
         first_name,
         middle_name,
         last_name,
-        department,
+        departmentId,
         shift,
         role,
       },

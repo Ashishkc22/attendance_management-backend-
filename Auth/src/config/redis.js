@@ -1,6 +1,8 @@
 const redis = require("redis");
 const logger = require("../utils/logger");
 
+console.log('Connecting to Redis at:', process.env.REDIS_URL);
+
 const redisClient = redis.createClient({
   url: process.env.REDIS_URL,
   socket: {
