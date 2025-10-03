@@ -17,7 +17,7 @@ async function createUser(data) {
     if (!permission) {
       throw new Error("permission not found.");
     }
-    const hashedPassword = hashPassword(data.password || "");
+    const hashedPassword = hashPassword(data.password || "User@123");
     const user = await prisma.users.create({
       data: {
         first_name: data.first_name,

@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "nodemon ./Auth/index.js && nodemon ./UserManagement/index.js"
+  },
   "dependencies": {
     "cookie-parser": "^1.4.7"
   }

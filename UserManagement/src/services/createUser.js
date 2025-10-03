@@ -27,7 +27,6 @@ async function inviteUser(data) {
   try {
     return await prisma.userProfile.create({
       data: {
-        userId: authUser.id,
         email,
         first_name,
         middle_name,

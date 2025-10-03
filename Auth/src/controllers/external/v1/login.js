@@ -70,7 +70,8 @@ async function login(req, res, next) {
     return res.status(200).json({
       data: {
         accessToken, // send access token in in memory at frontend,
-        refreshToken
+        refreshToken,
+        role: userDetails.role
       },
     });
   } catch (error) {

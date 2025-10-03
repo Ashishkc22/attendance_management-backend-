@@ -4,7 +4,7 @@ const sendInviteEmail = require("../../services/sendInviteEmail");
 async function registerUser(req, res, next) {
   try {
     const newUser = await createUser(req.body);
-    await sendInviteEmail(newUser.id, newUser.email);
+    // await sendInviteEmail(newUser.id, newUser.email);
     return res.status(201).json({
       data: newUser,
     });
