@@ -21,7 +21,6 @@ enum Role {
 
 model userProfile {
   id          String  @id @default(uuid())
-  userId      String  @unique
   first_name  String
   middle_name String
   last_name   String
